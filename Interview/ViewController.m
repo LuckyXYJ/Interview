@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import "CustomCardView.h"
+#import <Masonry/Masonry.h>
 
 @interface ViewController ()
 
@@ -55,13 +56,26 @@
     UIView *card = [[UIView alloc] initWithFrame:frame];
     card.backgroundColor = [UIColor blueColor];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:card.bounds];
+    UILabel *label = [[UILabel alloc] init];
     label.text = text;
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
     label.font = [UIFont boldSystemFontOfSize:35];
     
+    
+    
     [card addSubview:label];
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(card);
+    }];
+//    // 使用auto layout将label设置占满整个card
+//    label.translatesAutoresizingMaskIntoConstraints = NO;
+//    [NSLayoutConstraint activateConstraints:@[
+//        [label.leadingAnchor constraintEqualToAnchor:card.leadingAnchor],
+//        [label.trailingAnchor constraintEqualToAnchor:card.trailingAnchor],
+//        [label.topAnchor constraintEqualToAnchor:card.topAnchor],
+//        [label.bottomAnchor constraintEqualToAnchor:card.bottomAnchor]
+//    ]];
     return card;
 }
 

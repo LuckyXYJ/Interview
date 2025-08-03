@@ -29,9 +29,29 @@
 - (void)startAnimationWithCards:(NSArray<UIView *> *)cards {
     self.cards = cards;
 
+    
     // 添加子视图
-    for (UIView *card in cards) {
+    for (int i = 0; i < cards.count; i++) {
+        UIView *card = cards[i];
         [self addSubview:card];
+        
+//        UILabel *label = [[UILabel alloc] init];
+//        label.text = [NSString stringWithFormat:@"%d", i + 1];]
+//        label.textAlignment = NSTextAlignmentCenter;
+//        label.textColor = [UIColor whiteColor];
+//        label.font = [UIFont boldSystemFontOfSize:35];
+//        
+//        
+//        
+//        [card addSubview:label];
+//        // 使用auto layout将label设置占满整个card
+//        label.translatesAutoresizingMaskIntoConstraints = NO;
+//        [NSLayoutConstraint activateConstraints:@[
+//            [label.leadingAnchor constraintEqualToAnchor:card.leadingAnchor],
+//            [label.trailingAnchor constraintEqualToAnchor:card.trailingAnchor],
+//            [label.topAnchor constraintEqualToAnchor:card.topAnchor],
+//            [label.bottomAnchor constraintEqualToAnchor:card.bottomAnchor]
+//        ]];
     }
     
     CGSize originalSize = self.frame.size;
@@ -61,6 +81,7 @@
         self.cards[1].frame = CGRectMake(self.bigWidth + self.cardSpacing, 0, self.mediumWidth, self.mediumHeight);
         self.cards[2].frame = CGRectMake(self.bigWidth + self.cardSpacing, self.mediumHeight + 10, self.smallWidth, self.smallHeight);
         self.cards[3].frame = CGRectMake(self.bigWidth + self.cardSpacing * 2 + self.smallWidth, self.mediumHeight + 10, self.smallWidth, self.smallHeight);
+        [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self performSelector:@selector(animateToStateB) withObject:nil afterDelay:1.0];
     }];
@@ -73,6 +94,7 @@
         self.cards[1].frame = CGRectMake(self.mediumWidth + self.cardSpacing, 0, self.bigWidth, self.bigHeight); // Card 2
         self.cards[2].frame = CGRectMake(0, self.mediumHeight + self.cardSpacing, self.smallWidth, self.smallHeight); // Card 3
         self.cards[3].frame = CGRectMake(self.smallWidth + self.cardSpacing, self.mediumHeight + self.cardSpacing, self.smallWidth, self.smallHeight); // Card 4
+        [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self performSelector:@selector(animateToStateC) withObject:nil afterDelay:1.0];
     }];
@@ -85,6 +107,7 @@
         self.cards[1].frame = CGRectMake(self.bigWidth + self.cardSpacing * 2 + self.smallWidth, 0, self.smallWidth, self.smallHeight);
         self.cards[2].frame = CGRectMake(0, 0, self.bigWidth, self.bigHeight);
         self.cards[3].frame = CGRectMake(self.bigWidth + self.cardSpacing, self.smallHeight + self.cardSpacing, self.mediumWidth, self.mediumHeight);
+        [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self performSelector:@selector(animateToStateD) withObject:nil afterDelay:1.0];
     }];
@@ -97,6 +120,7 @@
         self.cards[1].frame = CGRectMake(self.smallWidth + self.cardSpacing, 0, self.smallWidth, self.smallHeight);
         self.cards[2].frame = CGRectMake(0, self.smallHeight + self.cardSpacing, self.mediumWidth, self.mediumHeight);
         self.cards[3].frame = CGRectMake(self.smallWidth * 2 + self.cardSpacing * 2, 0, self.bigWidth, self.bigHeight);
+        [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self performSelector:@selector(animateToStateA) withObject:nil afterDelay:1.0];
     }];
